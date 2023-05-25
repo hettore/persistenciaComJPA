@@ -25,6 +25,7 @@ public class CadastroDeProduto {
 		todos.forEach(p2 -> System.out.println(p.getNome()));
 		
 		
+		
 	}
 
 	private static void cadastrarProduto() {
