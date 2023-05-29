@@ -2,8 +2,11 @@ package br.com.alura.loja.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,14 +25,15 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "valor_total")
 	private BigDecimal valorTotal;
 	private LocalDate data = LocalDate.now();
 
 	@ManyToOne
 	private Cliente cliente;
 
-	@OneToMany
-	private List<itemPedido> itens;
+	@OneToMany (mappedBy = "pedido", cascade = CascadeType.ALL)
+	private List<ItemPedido> itens = new ArrayList<>();
 
 	public Pedido() {
 	}
@@ -38,6 +42,11 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
+	public void adicionarItem(ItemPedido item) {
+		item.setPedido(this);
+		this.itens.add(item);
+	}
+	
 	public Long getId() {
 		return id;
 	}
