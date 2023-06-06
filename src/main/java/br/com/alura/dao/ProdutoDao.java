@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.loja.modelo.Produto;
-import net.bytebuddy.asm.Advice.Return;
 
 public class ProdutoDao {
 
@@ -46,8 +45,7 @@ public class ProdutoDao {
 	}
 	
 	public List<Produto> buscarPorNomeDaCategoria(String nome) {
-		String jpql = "SELECT p FROM Produto p  WHERE p.categoria.nome = ?1";
-		return em.createQuery(jpql, Produto.class)
+		return em.createNamedQuery("Produto.produtosPorCategoria", Produto.class)
 				.setParameter(1, nome)
 				.getResultList();
 	}
