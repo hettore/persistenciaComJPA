@@ -1,11 +1,30 @@
 package br.com.alura.loja.modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class CategoriaId implements Serializable{
+	private static final long serialVersionUID = 1l;
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nome, tipo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CategoriaId other = (CategoriaId) obj;
+		return Objects.equals(nome, other.nome) && Objects.equals(tipo, other.tipo);
+	}
 
 	private String nome;
 	private String tipo;
