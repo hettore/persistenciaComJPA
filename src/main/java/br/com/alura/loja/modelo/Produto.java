@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "produtos")
 @NamedQuery(name = "Produto.produtosPorCategoria", 
 query = "SELECT p FROM Produto p  WHERE p.categoria.nome = ?1")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Produto {
 
 	@Id
