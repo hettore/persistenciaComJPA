@@ -38,4 +38,11 @@ public class PedidoDao {
 				+ "ORDER BY item.quantidade DESC";
 		return em.createQuery(jpql, RelatorioDeVendasVo.class).getResultList();
 	}
+	
+	public Pedido buscarPedidoComCliente(Long id) {
+		return em.createQuery("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id = :id", Pedido.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
+	
 }
